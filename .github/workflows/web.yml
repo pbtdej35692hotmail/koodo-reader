@@ -27,3 +27,13 @@ jobs:
         uses: borales/actions-yarn@v4
         with:
           cmd: build # will run `yarn build` command
+        uses: edgarrc/action-7z@v1
+      - name: 7zip
+        with:
+          args: 7z a -mx=9 -myx=9 -m0=LZMA2:d=512m:fb=256:mc=256:lc=4 -ms=1t -mmt=1 -ssw -mmemuse=8g a -r -t7z build.7z ./build/
+      - name: Upload releases
+        uses: ncipollo/release-action@v1
+        with:
+          artifacts: "build.7z"
+          bodyFile: "body.md"
+          token: ${{ secrets.YOUR_GITHUB_TOKEN }}      
