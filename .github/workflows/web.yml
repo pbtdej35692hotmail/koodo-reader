@@ -1,8 +1,5 @@
 name: Build/Web
-on:
-  push:
-    tags:
-      - "*"
+on: workflow_dispatch
 
 
 jobs:
@@ -35,5 +32,4 @@ jobs:
         uses: ncipollo/release-action@v1
         with:
           artifacts: "build.7z"
-          bodyFile: "body.md"
           token: ${{ secrets.YOUR_GITHUB_TOKEN }}      
