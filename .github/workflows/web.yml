@@ -23,9 +23,9 @@ jobs:
       - name: Build production bundle
         uses: borales/actions-yarn@v4
         with:
-          cmd: build # will run `yarn build` command
-        uses: edgarrc/action-7z@v1
+          cmd: build # will run `yarn build` command       
       - name: 7zip
+        uses: edgarrc/action-7z@v1
         with:
           args: 7z a -mx=9 -myx=9 -m0=LZMA2:d=512m:fb=256:mc=256:lc=4 -ms=1t -mmt=1 -ssw -mmemuse=8g a -r -t7z build.7z ./build/
       - name: Upload releases
