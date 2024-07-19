@@ -1,5 +1,9 @@
 name: Build/Web
-on: 
+on:
+  push:
+    tags:
+      - "*"
+
 
 jobs:
   build:
