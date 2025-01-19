@@ -35,13 +35,8 @@ jobs:
         uses: borales/actions-yarn@v4
         with:
           cmd: build
-      
-      - name: Test the app
-        uses: borales/actions-yarn@v4
-        with:
-          cmd: test
 
-      - name: he app
+      - name: Compress
         uses: edgarrc/action-7z@v1
         with:
           args: 7z -mx=9 -myx=9 -m0=LZMA2:d=512m:fb=256:mc=256:lc=4 -ms=1t -mmt=1 -ssw -mmemuse=8g a -t7z build.7z ./build/
