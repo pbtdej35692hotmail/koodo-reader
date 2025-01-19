@@ -19,7 +19,7 @@ jobs:
       - name: Check out Git repository
         uses: actions/checkout@v4
         with:
-          ref: $Target_tag
+          ref: v1.7.4
 
       - name: Install Node.js, NPM and Yarn
         uses: actions/setup-node@v4
