@@ -52,4 +52,4 @@ jobs:
           name: Web
           make_latest: true
           files: build.7z
-      
+          tag_name: Target_tag
