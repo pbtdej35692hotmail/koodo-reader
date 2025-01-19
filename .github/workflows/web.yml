@@ -8,18 +8,13 @@ env:
 
 jobs:
   release:
-    runs-on: ${{ matrix.os }}
-
-    # Platforms to build on/for
-    strategy:
-      matrix:
-        os: [ubuntu-latest, windows-latest]
+    runs-on: ubuntu-latest
 
     steps:
       - name: Check out Git repository
         uses: actions/checkout@v4
         with:
-          ref: v1.7.4
+          ref: Target_tag
 
       - name: Install Node.js, NPM and Yarn
         uses: actions/setup-node@v4
@@ -47,4 +42,4 @@ jobs:
           name: Web
           make_latest: true
           files: build.7z
-          tag_name: $Target_tag
+          tag_name: Target_tag
