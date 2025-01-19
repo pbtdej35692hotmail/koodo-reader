@@ -3,7 +3,7 @@ name: Web
 on: workflow_dispatch
 
 env:
-  Target_tag: latest
+  Target_tag: v1.7.4
   #Tag want to build.
 
 jobs:
@@ -47,9 +47,9 @@ jobs:
           args: 7z -mx=9 -myx=9 -m0=LZMA2:d=512m:fb=256:mc=256:lc=4 -ms=1t -mmt=1 -ssw -mmemuse=8g a -t7z build.7z ./build/
 
       - name: Create Github Release
-        uses: softprops/action-gh-release@v2.0.8
+        uses: softprops/action-gh-release@v2
         with:
           name: Web
           make_latest: true
           files: build.7z
-          tag_name: Target_tag
+          tag_name: $Target_tag
