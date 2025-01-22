@@ -1,0 +1,45 @@
+name: Web
+
+on: workflow_dispatch
+
+env:
+  Target_tag: v1.7.4
+  #Tag want to build.
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out Git repository
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ env.Target_tag }}
+
+      - name: Install Node.js, NPM and Yarn
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+
+      - name: Run install
+        uses: borales/actions-yarn@v4
+        with:
+          cmd: install
+
+      - name: Build production bundle
+        uses: borales/actions-yarn@v4
+        with:
+          cmd: build
+
+      - name: Compress
+        uses: edgarrc/action-7z@v1
+        with:
+          args: 7z -mx=9 -myx=9 -m0=LZMA2:d=512m:fb=256:mc=256:lc=4 -ms=1t -mmt=1 -ssw -mmemuse=8g a -t7z Koodo-Reader-${{ env.Target_tag }}-Web.7z ./build/
+
+      - name: Create Github Release
+        uses: softprops/action-gh-release@v2
+        with:
+          name: Web
+          make_latest: true
+          files: Koodo-Reader-${{ env.Target_tag }}-Web.7z
+          tag_name: ${{ env.Target_tag }}
